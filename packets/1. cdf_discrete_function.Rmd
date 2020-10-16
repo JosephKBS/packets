@@ -1,0 +1,39 @@
+---
+title: "cdf_dis_function"
+author: "JosephKBS"
+date: "10/16/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+cdf_dis_function <- function(xrange, fun){
+  lower <- c(min(xrange)-1)
+  upper <- c(max(xrange)+1)
+  #lower_li <- c(min(xrange)-0.001)
+  #upper_li <- c(max(xrange)+0.001)
+  xrange_ext <- as.matrix((c(lower,xrange, upper) ))
+
+  # empty data frame
+  table <- data.frame(matrix(nrow = dim(xrange_ext)[1]*2 , ncol = 2))
+  # loop
+  for (i in 1:dim(xrange_ext)[1]){
+  table[2*i,1] = t(xrange_ext)[i]
+  table[2*i+1,1] = t(xrange_ext)[i+1]-0.001
+  table[1,1] = t(xrange_ext)[1]-1
+  
+  table[2*i,2] = fun*(i-1)
+  table[2*i+1,2] = fun*(i-1)
+  
+  table[1,2] <- 0
+  table[2,2] <- 0
+  table[dim(xrange_ext)[1]*2  ,2] <- 1
+  table[dim(xrange_ext)[1]*2-1,2] <- 1
+  }  
+  plot(table[,1], table[,2], type='l', col="blue", main="CDF plot", xlab="X variables", ylab="Cumulative probabilities") 
+}
+```
+
