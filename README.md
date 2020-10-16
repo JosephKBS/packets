@@ -1,4 +1,4 @@
-# packets
+# Useful plotting functions for basic probability concept 
 
 1. CDF function (discrete)
   
