@@ -1,0 +1,36 @@
+---
+title: "2. pdf_cont_function"
+author: "JosephKBS"
+date: "10/16/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r}
+pdf_cont_function <- function(xrange, fun){
+  lower <- c(min(xrange)-1)
+  lower_li <- c(min(xrange)-0.001)
+  upper_li <- c(max(xrange)+0.001)
+  upper <- c(max(xrange)+1)
+  xrange_ext <- as.matrix((c(lower,lower_li, xrange, upper_li,  upper) ))
+# empty data frame
+  table <- data.frame(matrix(nrow = dim(xrange_ext)[1] , ncol = 2))
+
+  for (i in 1:dim(xrange_ext)[1]){
+    table[i,1] = t(xrange_ext)[i]
+
+    table[i,2] = fun*xrange_ext[i,1]
+    table[1,2] <- 0
+    table[2,2] <- 0 
+    table[dim(xrange_ext)[1]-1,2] <- 0
+    table[dim(xrange_ext)[1],2] <- 0
+  }
+  plot(table[,1], table[,2], type='l', col="blue")
+} 
+```
+
+
