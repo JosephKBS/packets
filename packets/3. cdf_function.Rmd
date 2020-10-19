@@ -21,7 +21,7 @@ cdf_function_num4 <- function(xrange, coef){
   upper <- c(max(xrange)+1)
   xrange_ext <- as.data.frame( c(low, xrange, upper) )
   # empty data frame
-  table <- data.frame(matrix(nrow = dim(xrange_ext)[1]*2 , ncol = 2))
+  table <- data.frame(matrix(nrow = dim(xrange_ext)[1]*2 , ncol = 3))
   
   # loop
   for (i in 1:dim(xrange_ext)[1]){
@@ -30,7 +30,7 @@ cdf_function_num4 <- function(xrange, coef){
   table[2*i,1] = t(xrange_ext)[i+1]-0.001
   table[1,1] = 0 # t(xrange_ext)[1]-1
   table[2,1] = 0.9999 # t(xrange_ext)[1]-0.001
-  table[dim(xrange_ext)[1]*2 ,1] = t(xrange_ext)[i]
+  table[dim(xrange_ext)[1]*2 ,1] = t(xrange_ext)[i]+0.0001
   
   # second col (Y value)
   table[1,2] <- 0
@@ -43,8 +43,21 @@ cdf_function_num4 <- function(xrange, coef){
   table[(dim(xrange_ext)[1]*2)-2 ,2] <- 1  
   table[(dim(xrange_ext)[1]*2)-1 ,2] <- 1
   table[dim(xrange_ext)[1]*2 ,2] <- 1
+  table[2*i ,3] <- ("include")
+  table[2*i-1 ,3] <- ("exclude")
+    }
+  plot(table[,1], table[,2], type='l', col="blue", main="CDF plot", xlab="X variables", ylab="Cumulative probabilities") 
+  
+  # pointer creation
+  for (j in 2:(dim(xrange_ext)[1]-2)){
+   points(table[2*j,1], table[2*j,2], cex=1.2, pch=1, col="red")
+   points(table[2*j-1,1], table[2*j-1,2],cex=1.2, pch=16, col="red")
+   
+   points(table[2,1], table[2,2],cex=1.5, pch=1, col="red")
+   points(table[dim(xrange_ext)[1]*2-3 ,1], table[dim(xrange_ext)[1]*2-3, 2], cex=1.2, pch=16, col="red")  
+  
   }
-  plot(table[,1], table[,2], type='l', col="blue", main="CDF plot", xlab="X variables", ylab="Cumulative probabilities") }
+}
 
 ```
 
