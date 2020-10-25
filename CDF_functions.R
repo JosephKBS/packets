@@ -1,7 +1,7 @@
 #-----------#
 # JosephKBS #
 #-----------#
-
+# 1
 cdf_dis_function <- function(xrange, fun){
   lower <- c(min(xrange)-1)
   upper <- c(max(xrange)+1)
@@ -43,7 +43,7 @@ cdf_dis_function <- function(xrange, fun){
 #fun <- (1/3)
 #cdf_dis_function(xrange, fun)
 
-
+#3
 cdf_function_num4 <- function(xrange, coef){
   low <- c(min(xrange)-1)
   upper <- c(max(xrange)+1)
@@ -94,4 +94,40 @@ cdf_function_num4 <- function(xrange, coef){
   lines(table[11:12,1], table[11:12,2], type='l', col="red")
 }
 
+# 4 factorial
 
+factorial <- function(n) {
+  if(n <= 1) {return(1)
+  } else { 
+    return(n * factorial(n-1)) }  }
+
+# 5 poisson random variable
+poisson_var <- function(mean, x){
+  exp(-mean)*mean^(x)/factorial(x) }
+
+# 6 negative binomial dist
+# r sucess on the x trial, p=possibility
+negative_binom <- function(p, r, x){
+  choose(x-1, r-1)*( (1-p)^(x-r) )*p^(r)  }
+
+# 7 hypergeometric calculator
+# N is total number
+# randomly drawing n elements
+# r is tagged
+# x is number of drawing from one side. (so the other will be n-x)
+
+hyper_geo <- function (N, r, n, x) {
+  choose(r,x)*choose(N-r, n-x)/choose(N, n)
+}
+
+# example 
+# There are 20 cards (6red, 14 black). 5 cards is drawn without replacement.
+# what is prob of drawing 4 red card?
+
+#  hyper_geo(16,6,5,3)
+
+
+#10 Limusine question
+limu_trip <- function(num_show, prob){
+  ( (prob)^(num_show) )*( (1-prob)^(6-num_show) ) * choose(6,num_show) 
+}
