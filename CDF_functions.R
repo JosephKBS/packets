@@ -1,7 +1,7 @@
-#-----------#
-# JosephKBS #
-#-----------#
-# 1
+#--------------------------------#
+#         JosephKBS #
+#--------------------------------#
+# 1--------------------------------------
 cdf_dis_function <- function(xrange, fun){
   lower <- c(min(xrange)-1)
   upper <- c(max(xrange)+1)
@@ -43,7 +43,9 @@ cdf_dis_function <- function(xrange, fun){
 #fun <- (1/3)
 #cdf_dis_function(xrange, fun)
 
-#3
+
+
+#3--------------------------------------
 cdf_function_num4 <- function(xrange, coef){
   low <- c(min(xrange)-1)
   upper <- c(max(xrange)+1)
@@ -94,23 +96,40 @@ cdf_function_num4 <- function(xrange, coef){
   lines(table[11:12,1], table[11:12,2], type='l', col="red")
 }
 
-# 4 factorial
-
+# 4 factorial --------------------------------------
 factorial <- function(n) {
   if(n <= 1) {return(1)
   } else { 
     return(n * factorial(n-1)) }  }
 
-# 5 poisson random variable
+
+# 5 poisson random variable--------------------------------------
+# need factorial function from #4
 poisson_var <- function(mean, x){
   exp(-mean)*mean^(x)/factorial(x) }
 
-# 6 negative binomial dist
+# 6 spanking parent function -------------------------------------
+# num_spank_parent = number of spanking parent (max=10)
+# spank_prob = probability
+spank_parent_function <- function(num_spank_parent, spank_prob){
+  if (num_spank_parent==0){
+    (spank_prob)^(0)*(1-spank_prob)^(10) * choose(10, num_spank_parent)
+  } else {
+    (spank_prob^num_spank_parent)*((1-spank_prob)^(10-num_spank_parent)) *choose(10, num_spank_parent)    
+  }}
+
+# example : possibility that no parent spanks
+nobody_spank <- spank_parent_function(0, 0.6)
+nobody_spank
+
+
+# 6 negative binomial dist--------------------------------------
 # r sucess on the x trial, p=possibility
 negative_binom <- function(p, r, x){
   choose(x-1, r-1)*( (1-p)^(x-r) )*p^(r)  }
 
-# 7 hypergeometric calculator
+
+# 7 hypergeometric calculator--------------------------------------
 # N is total number
 # randomly drawing n elements
 # r is tagged
@@ -127,7 +146,7 @@ hyper_geo <- function (N, r, n, x) {
 #  hyper_geo(16,6,5,3)
 
 
-#10 Limusine question
+#8 Limusine question --------------------------------------
 limu_trip <- function(num_show, prob){
   ( (prob)^(num_show) )*( (1-prob)^(6-num_show) ) * choose(6,num_show) 
 }
