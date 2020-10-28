@@ -123,7 +123,12 @@ nobody_spank <- spank_parent_function(0, 0.6)
 nobody_spank
 
 
-# 6 negative binomial dist--------------------------------------
+#6 binomial and negative binomial dist--------------------------------------
+# N is total number, picking x, p=possibility
+binom_ori <- function(N, x, p){
+  choose(N, x)*( (p)^x )*(1-p)^(N-x)
+}
+
 # r sucess on the x trial, p=possibility
 negative_binom <- function(p, r, x){
   choose(x-1, r-1)*( (1-p)^(x-r) )*p^(r)  }
@@ -135,7 +140,7 @@ negative_binom <- function(p, r, x){
 # r is tagged
 # x is number of drawing from one side. (so the other will be n-x)
 
-hyper_geo <- function (N, r, n, x) {
+hyper_geometric <- function (N, r, n, x) {
   choose(r,x)*choose(N-r, n-x)/choose(N, n)
 }
 
