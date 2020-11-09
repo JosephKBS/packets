@@ -180,3 +180,62 @@ par(mfrow=c(2,2))
 plot(density(table1[,1]))
 plot(density( table[,3] , table1[,2]))
 
+#----------------all function from the beginning-----------------------------------
+#----------------all function from the beginning-----------------------------------
+n = 5 # size
+p = 0.8 # prob of success
+
+#----------function-----------------
+berllouni <- function(n,p){
+  sample(0:1, size=n, replace=TRUE, prob=c(1-p,p))
+}
+
+berllouni(10, 0.8) # test
+#----------binomial dist------------------
+binomial <-  function(N, n, p){
+  results = rep(0, N)
+  for(i in 1:N){
+    results[i] = sum(sample(c(0,1), n, replace = T, prob = c(1-p, p))) # counting how many success
+  }
+   results 
+}
+
+unique(binomial(3000, 10, 0.7))
+hist( binomial(3000, 10, 0.7) )
+
+# x = binomial(10000, 5, 0.7)
+# x <- as.data.frame(x)
+# table(x)/10000
+
+# plot(table(x)/10000, ylab = "Probability")
+# plot(ecdf(x))
+#----------geometric dist------------------
+geometric = function(N, p){
+  results = rep(0, N)
+  for(i in 1:N){
+   x = 0 # happen in coin flipped ( o or 1)
+   k = 0 # num of fail
+   while(x == 0){
+      x = sample(c(0,1), size = 1, replace = TRUE, prob = c(1-p, p))
+      k = k + 1
+   }
+  results[i] = k # num of fail 
+  }
+  results
+}
+hist( geometric(1000, 0.7) )
+#----------negative dist------------------
+nega_bin <- function(N, r, p){
+  results = rep(0, N)
+  
+  for(i in 1:N){
+   x = 0  # num of success
+   k = 0  # num fail before success
+   while(x < r){
+      x = sum(sample(c(0,1), size = r, replace = TRUE, prob = c(1-p, p)))
+      k = k + 1  
+      }
+  results[i] = k # num of fail 
+  }
+  return(results)
+}
